@@ -1,0 +1,16 @@
+*~
+*.pyc
+*.training
+*.result
+*.npz
+*.param
+*.pickle
+venv/
+data/datasets/Ballroom
+data/datasets/GTZAN
+test
+output/
+error/
+build/
+.idea/
+.Rhistory
