@@ -29,17 +29,13 @@ Currently, MIRdl is for easily doing music classification using any deep learnin
 
 - **1)** Download a dataset. Copy it in *./data/datasets*. The library expects to have the dataset divided by folders that represent the tag to be predicted. 
 For example, for the GTZAN dataset (http://marsyasweb.appspot.com/download/data_sets/) the library expects:
-
 >./data/datasets/GTZAN/blues
 >
 >./data/datasets/GTZAN/classical
 >
 > (...)
 >
->./data/datasets/GTZAN/rock,
-
-where each folder contains all the songs for training, testing and validating for each class.
-
+>./data/datasets/GTZAN/rock
 - **2)** Adapt the *load_datasets.py* function to work using your dataset. We recommend you to use first the GTZAN dataset (already implemented) to understand how it works.
 
 - **3)** Set the *runMIRdl.py* parameters and the deep learning architecture in *buildArchitecture.py*.
