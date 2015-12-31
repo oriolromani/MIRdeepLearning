@@ -40,15 +40,18 @@ def main(parameters):
         loss = loss.mean()
         return loss
 
+    # define training functions
     prediction = lasagne.layers.get_output(network)
     loss=computeLoss(prediction, target_var, parameters)
     params = lasagne.layers.get_all_params(network, trainable=True)
     updates = lasagne.updates.nesterov_momentum(loss, params, learning_rate=parameters['lr'], momentum=parameters['momentum'])
 
+    # define testing/val functions
     test_prediction = lasagne.layers.get_output(network, deterministic=True)
     test_loss=computeLoss(test_prediction, target_var, parameters)
     test_acc = T.mean(T.eq(T.argmax(test_prediction, axis=1), target_var), dtype=theano.config.floatX)
 
+    # compile training and test/val functions
     train_fn = theano.function([input_var, target_var], loss, updates=updates)
     val_fn = theano.function([input_var, target_var], [test_loss, test_acc])
 
@@ -56,6 +59,7 @@ def main(parameters):
     hash = random.getrandbits(128)
     trainLoss_ans=np.inf
     for epoch in range(parameters['num_epochs']):
+        # training set
         train_err = 0
         train_batches = 0
         start_time = time.time()
@@ -64,6 +68,7 @@ def main(parameters):
             train_err += train_fn(inputs, targets)
             train_batches += 1
 
+        # validation set
         val_err = 0
         val_acc = 0
         val_batches = 0
@@ -74,6 +79,7 @@ def main(parameters):
             val_acc += acc
             val_batches += 1
 
+        # output
         print("Epoch {} of {} took {:.3f}s".format(
             epoch + 1, parameters['num_epochs'], time.time() - start_time))
         print("  training loss:\t\t{:.6f}".format(train_err / train_batches))
@@ -106,16 +112,19 @@ def main(parameters):
             tr = open('./data/results/'+parameters['dataset']+'_'+parameters['type']+'_'+str(hash)+'.training', 'w')
             tr.write('epoch,trainingLoss,validationLoss,validationAccuracy\n')
             tr.close()
-        # training evolution
+        # save training evolution
         tr = open('./data/results/'+parameters['dataset']+'_'+parameters['type']+'_'+str(hash)+'.training', 'a')
         tr.write(str(epoch)+','+str(train_err/train_batches)+','+str(val_err / val_batches)+','+str(val_acc / val_batches * 100)+'\n')
         tr.close()
         ##################################################################################
 
     print("Testing with the best model..")
+    # load best model
     with np.load(name+'.npz') as f:
         param_values = [f['arr_%d' % i] for i in range(len(f.files))]
     lasagne.layers.set_all_param_values(network, param_values)
+
+    # test it!
     test_err = 0
     test_acc = 0
     test_batches = 0
@@ -125,6 +134,8 @@ def main(parameters):
         test_err += err
         test_acc += acc
         test_batches += 1
+
+    # output
     print("Final results:")
     print("  test loss:\t\t\t{:.6f}".format(test_err / test_batches))
     print("  test accuracy:\t\t{:.2f} %".format(
