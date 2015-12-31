@@ -20,45 +20,37 @@ Currently, MIRdl is for easily doing music classification using any deep learnin
 - *buildArchitecture.py*: where the Lasagne-Theano network architecture is set.
 - *load_datasets.py*: where audios are loaded, formatted and normalized to be fed into the net. 
 - *MIRdl.py*: main part of the library where the training happens.
-- *utils.py*: it allows visualizing the training results (*./data/results*)
+- *utils.py*: it allows visualizing the training results (*./data/results*).
 
 **Steps for using MIRdl**
-- 0.0) Install.
+- **0.0)** Install.
 
-- 0.1) Understand this tutorial: http://lasagne.readthedocs.org/en/latest/user/tutorial.html. This library is based on it!
+- **0.1)** Understand this tutorial: http://lasagne.readthedocs.org/en/latest/user/tutorial.html. This library is based on it!
 
-- 1) Download a dataset. Copy it in *./data/datasets*. The library expects to have the dataset divided by folders that represent the tag to be predicted. 
+- **1)** Download a dataset. Copy it in *./data/datasets*. The library expects to have the dataset divided by folders that represent the tag to be predicted. 
 For example, for the GTZAN dataset (http://marsyasweb.appspot.com/download/data_sets/) the library expects:
 
-./data/datasets/GTZAN/blues
-
-./data/datasets/GTZAN/classical
-
-./data/datasets/GTZAN/country
-
-./data/datasets/GTZAN/disco
-
-./data/datasets/GTZAN/hiphop
-
-./data/datasets/GTZAN/jazz
-
-./data/datasets/GTZAN/metal
-
-./data/datasets/GTZAN/pop
-
-./data/datasets/GTZAN/reggae
-
-./data/datasets/GTZAN/rock,
+>./data/datasets/GTZAN/blues
+>./data/datasets/GTZAN/classical
+>./data/datasets/GTZAN/country
+>./data/datasets/GTZAN/disco
+>./data/datasets/GTZAN/hiphop
+>./data/datasets/GTZAN/jazz
+>./data/datasets/GTZAN/metal
+>./data/datasets/GTZAN/pop
+>./data/datasets/GTZAN/reggae
+>
+>./data/datasets/GTZAN/rock,
 
 where each folder contains all the songs for training, testing and validating for each class.
 
-- 2) Adapt the *load_datasets.py* function to work using your dataset. We recommend you to use first the GTZAN dataset (already implemented) to understand how it works.
+- **2)** Adapt the *load_datasets.py* function to work using your dataset. We recommend you to use first the GTZAN dataset (already implemented) to understand how it works.
 
-- 3) Set the *runMIRdl.py* parameters and the deep learning architecture in *buildArchitecture.py*.
+- **3)** Set the *runMIRdl.py* parameters and the deep learning architecture in *buildArchitecture.py*.
 
-- 4) Run *runMIRdl.py*.
+- **4)** Run *runMIRdl.py*.
 
-- 5) [Optional] Visualize what the net has learned with *utils.py*.  
+- **5)** *[Optional]* Visualize what the net has learned with *utils.py*.  
 
 **Future features**
 - Autoencoders support.
