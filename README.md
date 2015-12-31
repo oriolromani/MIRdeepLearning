@@ -31,14 +31,10 @@ Currently, MIRdl is for easily doing music classification using any deep learnin
 For example, for the GTZAN dataset (http://marsyasweb.appspot.com/download/data_sets/) the library expects:
 
 >./data/datasets/GTZAN/blues
+>
 >./data/datasets/GTZAN/classical
->./data/datasets/GTZAN/country
->./data/datasets/GTZAN/disco
->./data/datasets/GTZAN/hiphop
->./data/datasets/GTZAN/jazz
->./data/datasets/GTZAN/metal
->./data/datasets/GTZAN/pop
->./data/datasets/GTZAN/reggae
+>
+> (...)
 >
 >./data/datasets/GTZAN/rock,
 
